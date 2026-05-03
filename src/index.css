@@ -8,45 +8,165 @@
   body {
     font-family: "Inter", sans-serif;
     background-color: #020617;
-    color: white;
+    color: #e5e7eb;
   }
 
+  /* Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #0f172a;
+    background: #020617;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #1e40af;
+    background: #334155;
     border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #22d3ee;
+    background: #64748b;
   }
 }
 
 @layer utilities {
-  .animate-spin-slow {
-    animation: spin 8s linear infinite;
-  }
 
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-  }
-
+  /* 🖥 Terminal Font */
   .font-mono {
     font-family: "JetBrains Mono", "Fira Code", monospace;
   }
 
+  /* 🧾 Clean Panel (like server dashboard) */
+  .panel {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(71, 85, 105, 0.4);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+  }
+
+  /* 📊 Subtle Hover */
+  .panel-hover {
+    transition: all 0.2s ease;
+  }
+
+  .panel-hover:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+    background: rgba(15, 23, 42, 0.8);
+  }
+
+  /* 🧠 Section Header */
+  .section-title {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #94a3b8;
+  }
+
+  /* 💻 Terminal Text */
+  .terminal {
+    color: #22c55e;
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .terminal::after {
+    content: "_";
+    animation: blink 1s infinite;
+    margin-left: 2px;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  /* 🟢 Status Indicators */
+  .status-online {
+    color: #22c55e;
+  }
+
+  .status-warning {
+    color: #facc15;
+  }
+
+  .status-offline {
+    color: #ef4444;
+  }
+
+  /* 🟩 Status Dot */
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .dot-online {
+    background: #22c55e;
+  }
+
+  .dot-warning {
+    background: #facc15;
+  }
+
+  .dot-offline {
+    background: #ef4444;
+  }
+
+  /* 📈 Grid Background (very subtle) */
   .bg-grid {
     background-image:
-      linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
+      linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
   }
+
+  /* 📊 Metric Card */
+  .metric {
+    padding: 12px;
+    border-radius: 10px;
+    background: rgba(2, 6, 23, 0.6);
+    border: 1px solid rgba(71, 85, 105, 0.3);
+  }
+
+  /* ⚡ Progress Bar */
+  .progress-bar {
+    height: 6px;
+    border-radius: 4px;
+    background: rgba(71, 85, 105, 0.3);
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: #22c55e;
+  }
+
+  /* 🧾 Code Block */
+  .code-block {
+    background: #020617;
+    border: 1px solid rgba(71, 85, 105, 0.4);
+    padding: 12px;
+    border-radius: 8px;
+    font-family: "JetBrains Mono", monospace;
+    color: #22c55e;
+  }
+
+  /* 🧠 Table Style */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .table th {
+    text-align: left;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    padding-bottom: 6px;
+  }
+
+  .table td {
+    padding: 6px 0;
+    border-top: 1px solid rgba(71, 85, 105, 0.2);
+  }
+
 }

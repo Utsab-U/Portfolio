@@ -73,20 +73,13 @@ export const education = [
 
 export const certifications = [
   {
-    name: "Motadata Product Advocate Training",
-    authority: "Motadata",
-    startedOn: "Feb 2025",
-    finishedOn: "Feb 2027",
-    licenseNumber: "DZ83WVIJ4yqssMNS2gbnCA",
-    url: "https://learning.motadata.com/certifications/DZ83WVIJ4yqssMNS2gbnCA/",
-  },
-  {
     name: "Certified Phishing Prevention Specialist (CPPS)",
     authority: "Hack & Fix",
     startedOn: "Dec 2025",
     finishedOn: "",
     licenseNumber: "5305-3950-2706-9040",
-    url: "https://academy.hackandfix.com/b42ffd6d-ff6d-46db-8213-3f00145dbe8a",
+    url: "https://academy.hackandfix.com/certificate-page/?user=14200&course=53700",
+    image: "/certs/CPPS.jpg",
   },
   {
     name: "Cybersecurity Career Starter Certification (CCSC)",
@@ -94,7 +87,8 @@ export const certifications = [
     startedOn: "Dec 2025",
     finishedOn: "",
     licenseNumber: "3277-2187-5453-1652",
-    url: "https://academy.hackandfix.com/4315a641-cf2c-428d-b9b5-87db2aa71eae",
+    url: "https://academy.hackandfix.com/certificate-page/?user=14200&course=54789",
+    image: "/certs/CCSC.jpg",
   },
   {
     name: "Foundations of Log Analysis for Cyber Defense",
@@ -103,5 +97,24 @@ export const certifications = [
     finishedOn: "",
     licenseNumber: "",
     url: "https://courses.redteamleaders.com/completion/8d0db2d5147e73dd",
+    image: "/certs/Log.jpg",
+  },
+   {
+    name: "Axigen Mail Certified Engineer",
+    authority: "Axigen Messaging",
+    startedOn: "Dec 2024",
+    finishedOn: "",
+    licenseNumber: "",
+    url: "404.html",
+    image: "/certs/Axigen.jpg",
+  },
+  {
+    name: "FALCON 101: Falcon Platform Technical Fundamentals",
+    authority: "CrowdStrike University",
+    startedOn: "Nov 2024",
+    finishedOn: "",
+    licenseNumber: "",
+    url: "404.html",
+    image: "/certs/CrowdStrike.jpg",
   },
 ];

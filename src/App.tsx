@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
+import {FiX} from "react-icons/fi"
 import { profile, positions, skills, education, certifications } from "./data/portfolio";
 import profilePhoto from "./assets/profile.jpg";
-
+import { motion, AnimatePresence } from "framer-motion";
 // ── Utility ──────────────────────────────────────────────────────────────────
 const skillCategory: Record<string, { color: string; bg: string; border: string }> = {
   security: {
@@ -219,7 +220,7 @@ function Navbar({ active }: { active: string }) {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="font-mono text-cyan-400 font-bold text-lg tracking-widest hover:text-cyan-300 transition-colors"
         >
-          &lt;UU/&gt;
+          &lt;UTSAB UPRETI/&gt;
         </button>
 
         {/* Desktop */}
@@ -273,6 +274,7 @@ function Navbar({ active }: { active: string }) {
 // ── Main App ──────────────────────────────────────────────────────────────────
 export default function App() {
   const [activeSection, setActiveSection] = useState("hero");
+  const [selectedCert, setSelectedCert] = useState(null)
 
   useEffect(() => {
     const sections = ["about", "experience", "skills", "education", "certifications", "contact"];
@@ -438,6 +440,7 @@ export default function App() {
                 { icon: "📧", label: "Email", value: profile.email, href: `mailto:${profile.email}` },
                 { icon: "🔗", label: "LinkedIn", value: "utsab-upreti", href: profile.linkedin },
                 { icon: "🐙", label: "GitHub", value: "UK1211KING", href: profile.github },
+                { icon: "📱", label: "Contact Number", value: "+977 9813788742", href: profile.github },
               ].map((item) => (
                 <div
                   key={item.label}
@@ -580,10 +583,9 @@ export default function App() {
         <Section id="certifications" title="Certifications" icon="🏆">
           <div className="grid sm:grid-cols-2 gap-6">
             {certifications.map((cert, i) => (
-              <a
+              <button
                 key={i}
-                href={cert.url}
-                target="_blank"
+                onClick={()=> setSelectedCert(cert)}
                 rel="noopener noreferrer"
                 className="block bg-slate-900/60 border border-slate-800 rounded-2xl p-6 hover:border-cyan-500/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/10 backdrop-blur-sm group"
               >
@@ -612,9 +614,85 @@ export default function App() {
                 <div className="mt-4 flex items-center gap-1 text-xs text-cyan-600 group-hover:text-cyan-400 transition-colors font-mono">
                   View Certificate ↗
                 </div>
-              </a>
+              </button>
             ))}
           </div>
+          <AnimatePresence>
+            {selectedCert && (
+              <motion.div
+                className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+                onClick={() => setSelectedCert(null)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <motion.div
+                  className="relative w-full max-w-5xl bg-slate-900 border border-cyan-500/30 rounded-2xl p-5 shadow-2xl"
+                  onClick={(e) => e.stopPropagation()}
+                  initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, y: 30 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  {/* Close Button */}
+                  <button
+                    onClick={() => setSelectedCert(null)}
+                    className="absolute top-4 right-4 text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-full p-2 transition"
+                    aria-label="Close certificate preview"
+                  >
+                    <FiX size={22} />
+                  </button>
+
+                  {/* Modal Header */}
+                  <div className="mb-5 pr-12">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white">
+                      {selectedCert.name}
+                    </h3>
+
+                    <p className="text-sm text-cyan-400 mt-1">
+                      {selectedCert.issuer} • {selectedCert.year}
+                    </p>
+                  </div>
+
+                  {/* Certificate Image */}
+                  <div className="bg-slate-950/70 rounded-xl border border-slate-700/50 p-3">
+                    {selectedCert && (
+  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+    <div className="bg-slate-900 rounded-2xl p-6 max-w-3xl w-full border border-slate-700 relative">
+
+      {/* Close button */}
+      <button
+        onClick={() => setSelectedCert(null)}
+        className="absolute top-4 right-4 text-slate-400 hover:text-white"
+      >
+        ✕
+      </button>
+
+      {/* 🔗 LINK (TOP) */}
+      <a
+        href={selectedCert.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-cyan-400 hover:underline text-sm block mb-4"
+      >
+        🔗 View Official Certificate
+      </a>
+
+      {/* 🖼 IMAGE (BOTTOM) */}
+      <img
+        src={selectedCert.image}
+        alt={selectedCert.name}
+        className="w-full rounded-lg border border-slate-700"
+      />
+
+    </div>
+  </div>
+)}
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </Section>
 
         {/* ── CONTACT ──────────────────────────────────────────────────────── */}
@@ -625,7 +703,7 @@ export default function App() {
               I'm always open to a conversation.
             </p>
           </div>
-          <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+          <div className="grid grid-cols-2 gap-6 max-w-3xl mx-auto">
             {[
               {
                 icon: "📧",
@@ -654,6 +732,15 @@ export default function App() {
                 border: "border-slate-600/30",
                 hover: "hover:border-slate-500/50",
               },
+              {
+                icon: "📱",
+                label: "Contact Number",
+                value: "+977 9813788742",
+                href: "tel:+977 9813788742",
+                color: "from-slate-700/30 to-slate-600/20",
+                border: "border-slate-600/30",
+                hover: "hover:border-slate-500/50",
+              },
             ].map((item) => (
               <a
                 key={item.label}
@@ -676,7 +763,7 @@ export default function App() {
         <footer className="border-t border-slate-800/60 py-10 text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="h-px w-16 bg-gradient-to-r from-transparent to-blue-500/50" />
-            <span className="font-mono text-cyan-500 font-bold text-lg">&lt;UU/&gt;</span>
+            <span className="font-mono text-cyan-500 font-bold text-lg">&lt;UTSAB UPRETI/&gt;</span>
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-blue-500/50" />
           </div>
           <p className="text-slate-600 text-sm font-mono">
